@@ -1,0 +1,22 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+  external_labels:
+    project: "monitoring-alerting-stack"
+
+rule_files:
+  - "/etc/prometheus/alerts.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - "alertmanager:9093"
+
+scrape_configs:
+  - job_name: "monitoring-demo-app"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets:
+          - "monitoring-demo-app:8000"

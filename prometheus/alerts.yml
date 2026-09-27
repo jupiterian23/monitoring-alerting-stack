@@ -1,0 +1,11 @@
+groups:
+  - name: application-alerts
+    rules:
+      - alert: ApplicationErrorsDetected
+        expr: increase(app_errors_total[5m]) > 0
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Application errors detected"
+          description: "The monitoring demo application has reported one or more errors during the last five minutes."

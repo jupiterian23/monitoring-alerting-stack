@@ -1,0 +1,16 @@
+global:
+  resolve_timeout: 1m
+
+route:
+  receiver: "project9-webhook"
+  group_by:
+    - "alertname"
+  group_wait: 10s
+  group_interval: 30s
+  repeat_interval: 4h
+
+receivers:
+  - name: "project9-webhook"
+    webhook_configs:
+      - url: "http://monitoring-demo-app:8000/alerts"
+        send_resolved: true
